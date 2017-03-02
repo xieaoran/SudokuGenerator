@@ -1,0 +1,51 @@
+﻿<Page
+    x:Class="SudokuGenerator.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" RequestedTheme="Dark">
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush Stretch="Fill" ImageSource="Assets/bg.png" />
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="3*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="9*" />
+            <ColumnDefinition Width="7*" />
+        </Grid.ColumnDefinitions>
+
+        <GridView x:Name="SudokuView" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3"
+                  ItemsSource="{Binding Numbers}" SelectionMode="Single" KeyDown="KeyDownHandler">
+            <GridView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <ItemsWrapGrid MaximumRowsOrColumns="9" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </ItemsPanelTemplate>
+            </GridView.ItemsPanel>
+            <GridView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Value, Mode=TwoWay}" />
+                </DataTemplate>
+            </GridView.ItemTemplate>
+            <GridView.ItemContainerStyle>
+                <Style TargetType="GridViewItem">
+                    <Setter Property="BorderBrush" Value="White" />
+                    <Setter Property="BorderThickness" Value="1" />
+                    <Setter Property="Background" Value="{ThemeResource ApplicationPageBackgroundThemeBrush}" />
+                </Style>
+            </GridView.ItemContainerStyle>
+        </GridView>
+        <Button x:Uid="Solve" x:Name="SolveButton" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch" FontSize="24" Click="Solve_Click" Margin="160,90" />
+        <Button x:Uid="Clear" x:Name="ClearButton" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                FontSize="24" Click="Clear_Click" Margin="160,90" />
+        <Button x:Uid="Exit" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                FontSize="24" Click="Exit_Click" Margin="160,90" />
+    </Grid>
+</Page>
